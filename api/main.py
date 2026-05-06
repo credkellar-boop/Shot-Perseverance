@@ -29,3 +29,19 @@ def emergency_save(signum, frame):
 # Register the reboot/interrupt signals
 signal.signal(signal.SIGINT, emergency_save)
 signal.signal(signal.SIGTERM, emergency_save)
+from core.projection import ProjectionEngine
+from core.session_manager import recover_state
+
+def run_engine():
+    # 1. Check for Reboot Recovery
+    state = recover_state()
+    
+    # 2. Initialize the Matrix (using saved calibration)
+    # This ensures the 'Heat Map' stays aligned even after a crash
+    floor_engine = ProjectionEngine(state['calibration_points'])
+    
+    # 3. Start Processing 4K Feed
+    while True:
+        # Process frames, apply 'Sync-Link' for Alley-oops, 
+        # and project Heat Maps to the floor...
+        pass
