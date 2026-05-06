@@ -1,0 +1,11 @@
+video:
+  target_fps: 60
+  upscale: false
+
+physics:
+  hoop_height_ft: 10.0
+  ball_diameter_in: 9.5
+
+thresholds:
+  confidence: 0.65
+  motion_blur_skip: true
