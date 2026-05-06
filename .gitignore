@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+__pycache__/
+*.py[cod]
+.env
+venv/
+data/raw_videos/*
+data/processed_videos/*
+models/yolo_weights/*.pt
+.DS_Store
