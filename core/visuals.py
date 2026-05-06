@@ -11,3 +11,16 @@ def draw_sync_link(frame, passer_pos, finisher_pos, alpha=0.6):
     
     # Blend with original frame for translucency
     return cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0)
+def apply_nfl_visuals(frame, play_state, is_defense=True):
+    # DEFENSE: Always draw tactical overlays
+    if is_defense:
+        frame = draw_coverage_bubbles(frame)
+        frame = draw_pass_rush_timer(frame)
+        
+    # OFFENSE: Only draw if the play is 'Spectacular'
+    else:
+        if play_state == "SPECTACULAR":
+            frame = apply_speed_streaks(frame) # Neon trails on the runner
+            frame = trigger_zoom_on_ball(frame) # 4K crop on the catch
+            
+    return frame
