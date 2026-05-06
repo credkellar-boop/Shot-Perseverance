@@ -1,39 +1,66 @@
-import json
+import cv2
 import time
-
-def auto_save_metrics(session_id, action_type, metrics):
-    filename = f"data/logs/session_{session_id}.json"
-    with open(filename, 'a') as f:
-        json.dump({"timestamp": time.time(), "type": action_type, "data": metrics}, f)
-        f.write('\n')
-
-# REBOOT WRAPPER
-if __name__ == "__main__":
-    while True:
-        try:
-            print("Shot-Perseverance Online...")
-            run_engine() # Your main processing loop
-        except Exception as e:
-            print(f"System Crash: {e}. Rebooting in 5 seconds...")
-            time.sleep(5)
-            continue # Restarts the loop automatically
-import os
-import signal
-
-def emergency_save(signum, frame):
-    """Triggered if the system is shutting down or crashing."""
-    print("CRITICAL: Saving session data before reboot...")
-    # Call your session_manager.checkpoint_state() here
-    exit(1)
-
-# Register the reboot/interrupt signals
-signal.signal(signal.SIGINT, emergency_save)
-signal.signal(signal.SIGTERM, emergency_save)
+from core.pose_estimator import PoseEngine
 from core.projection import ProjectionEngine
-from core.session_manager import recover_state
+from core.classifier import ActionTrigger
+from core.visuals import CinematicRenderer
+from core.report_gen import ShotPerseveranceReport
+from core.session_manager import SessionLogger, recover_state
 
-def run_engine():
-    # 1. Check for Reboot Recovery
+class ShotPerseveranceOS:
+    def __init__(self, video_source, calibration_points):
+        self.cap = cv2.VideoCapture(video_source)
+        self.engine = PoseEngine()
+        self.matrix = ProjectionEngine(calibration_points)
+        self.classifier = ActionTrigger(fps=self.cap.get(cv2.CAP_PROP_FPS))
+        self.renderer = CinematicRenderer()
+        self.logger = SessionLogger()
+        self.session_actions = []
+
+    def run(self):
+        print("🚀 Shot-Perseverance Engine Online...")
+        
+        while self.cap.isOpened():
+            ret, frame = self.cap.read()
+            if not ret: break
+
+            # 1. AI SKELETAL TRACKING
+            landmarks = self.engine.get_landmarks(frame)
+            
+            if landmarks:
+                # 2. PHYSICS & ACTION CLASSIFICATION
+                # Logic: Is it a shot? A dunk? A fast break?
+                state = self.classifier.detect_state(landmarks)
+                
+                # 3. CINEMATIC RENDERING (The 4K "Look")
+                # Logic: Draw 'Sync-Links' for Assists or 'Heat Maps' on floor
+                frame = self.renderer.apply_effects(frame, landmarks, state)
+                
+                # 4. DATA LOGGING (Auto-Save Heartbeat)
+                if state != "IDLE":
+                    action_data = self.process_action_data(state, landmarks)
+                    self.session_actions.append(action_data)
+                    self.logger.log_event(state, action_data['score'])
+
+            cv2.imshow('Shot-Perseverance 4K HD View', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'): break
+
+        self.shutdown()
+
+    def shutdown(self):
+        # 5. FINAL REPORT GENERATION
+        print("📊 Session Ended. Generating Scouting Report...")
+        report = ShotPerseveranceReport(session_id=int(time.time()))
+        report.generate_pdf(player_name="Elite Trainee", actions=self.session_actions)
+        self.cap.release()
+        cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    # In a real reboot scenario, 'recover_state()' would pull these from the .tmp file
+    calib_pts = [[100, 500], [900, 500], [950, 800], [50, 800]] 
+    app = ShotPerseveranceOS(video_source="data/raw_videos/practice_clip.mp4", 
+                             calibration_points=calib_pts)
+    app.run()
     state = recover_state()
     
     # 2. Initialize the Matrix (using saved calibration)
