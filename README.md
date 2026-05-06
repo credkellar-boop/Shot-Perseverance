@@ -1,39 +1,39 @@
 # 🏀 Shot-Perseverance OS
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/darionkellar/shot-perseverance/python-app.yml?branch=main&style=for-the-badge)
-![Python Version](https://img.shields.io/badge/python-3.11-blue?style=for-the-badge&logo=python)
+![Build Status](https://img.shields.io/github/actions/workflow/status/darionkellar/shot-perseverance/python-app.yml?branch=main&style=for-the-badge&logo=github)
+![Python Version](https://img.shields.io/badge/python-3.11+-blue?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
-![Maintained](https://img.shields.io/badge/Maintained%3F-yes-brightgreen?style=for-the-badge)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange?style=for-the-badge)
+![Code Style](https://img.shields.io/badge/code%20style-black-000000?style=for-the-badge)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.13.0-white?style=for-the-badge&logo=opencv)
 
-**Shot-Perseverance OS** is a high-performance, multi-sport computer vision engine designed to analyze biomechanics, physics, and tactical play in real-time. By leveraging **Homography Matrices**, **MediaPipe Pose Estimation**, and **Custom Physics Kernels**, it transforms standard 2D video into a rich 4K analytical broadcast.
-
----
-
-### 🏟 Supported Sports & Logic
-The system uses a dynamic `SportKernel` to swap physics constants and rule-based logic modules:
-
-* **Basketball:** Shot tracking (release height/angle), Alley-oop detection, and "The Dip" rhythm analysis.
-* **Soccer (Football):** Real-time offside line visualization and "Beckham Curve" trajectory prediction.
-* **American Football (NFL):** Sack clocks, "Coverage Bubbles," and yardage gain tracking.
-* **Hockey:** High-speed puck tracking with adjusted collision friction.
-* **Baseball:** Pitch velocity and ball-9IN contact dynamics.
-* **UFC/Combat:** Contact dynamics and strike impact frame analysis.
+**Shot-Perseverance OS** is a high-performance computer vision engine built for real-time multi-sport analytics. By combining **MediaPipe Pose Estimation** with a custom **Physics Kernel**, the system tracks biomechanics, calculates trajectories, and generates automated highlight reels in 4K.
 
 ---
 
-### ✨ Core Features
-* **Cinematic Renderer:** Automated 4K crop/zoom on "Spectacular" plays.
-* **Spectacular Logic:** Auto-saves highlights based on vertical jump, ball velocity, or crowd noise spikes.
-* **Audio Intelligence:** Real-time feedback via `Pygame` for rhythm training and auditory cues.
-* **Cloud Sync:** Automated AWS S3 syncing for scouting reports and highlight reels.
-* **Auto-Heartbeat:** Resilient session management that survives crashes via local SQLite logging.
+### 🏟 Multi-Sport Kernel Support
+The engine dynamically swaps physics constants ($gravity, friction, drag$) and rule-based logic modules:
+
+* **Basketball:** Analyzes "The Dip" rhythm, release height/angle, and detects Alley-oop completion.
+* **Soccer (Football):** Real-time offside line visualization and "Beckham Curve" (Magnus effect) prediction.
+* **American Football (NFL):** Sack clocks, "Coverage Bubbles" for defensive backs, and yardage tracking.
+* **Combat (UFC):** Impact frame analysis, strike velocity, and contact dynamics.
+* **Hockey & Baseball:** High-speed object tracking (Puck/Ball) with homography-based velocity scaling.
 
 ---
 
-### 🛠 Installation
+### ✨ Key Features
+* **🎬 Cinematic Renderer:** Automated 4K crop-and-zoom on "Spectacular" plays using hip-midpoint tracking.
+* **🚀 Spectacular Logic:** Auto-triggers highlight saves based on vertical jump (>30"), ball velocity, or crowd noise decibel spikes.
+* **🔊 Audio Intelligence:** Real-time auditory feedback (e.g., "Swish" or "Off-rhythm" cues) via `Pygame` for performance training.
+* **☁️ Cloud Sync:** Native AWS S3 integration for automated scouting report and highlight uploads.
+* **🛡 Crash Recovery:** "Auto-Heartbeat" system ensures session data is saved to SQLite even during hardware reboots.
 
-1. **Clone & Enter:**
-   ```bash
-   git clone [https://github.com/darionkellar/shot-perseverance.git](https://github.com/darionkellar/shot-perseverance.git)
-   cd shot-perseverance
+---
+
+### 📂 Directory Structure
+```text
+├── api/             # FastAPI backend for remote logging & schemas
+├── core/            # AI Logic: Physics, Kinematics, & Goal Detection
+├── github/          # CI/CD workflows for automated testing
+├── models/          # YAML configs for sport-specific thresholds
+└── Dockerfile       # Production-ready containerization
