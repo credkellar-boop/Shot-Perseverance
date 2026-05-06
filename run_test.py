@@ -1,33 +1,18 @@
+import pytest
 import cv2
+import numpy as np
 from core.pose_estimator import PoseEngine
 
-def test_engine(video_path):
+def test_engine_initialization():
+    # Test if the engine can initialize without crashing
     engine = PoseEngine()
-    cap = cv2.VideoCapture(video_path)
+    assert engine is not None
 
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if not ret:
-            break
-
-        # Get landmarks from our engine
-        landmarks = engine.get_landmarks(frame)
-        
-        if landmarks:
-            # Focus on the right wrist (Landmark 16) or left (Landmark 15)
-            # This is the 'release point' data we'll eventually feed to kinematics.py
-            mp_drawing = mp.solutions.drawing_utils
-            mp_pose = mp.solutions.pose
-            mp_drawing.draw_landmarks(frame, landmarks, mp_pose.POSE_CONNECTIONS)
-
-        cv2.imshow('Shot-Perseverance Debug Feed', frame)
-        
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
-    cap.release()
-    cv2.destroyAllWindows()
-
-if __name__ == "__main__":
-    # Drop a clip of a jumpshot into data/raw_videos/ and put the filename here
-    test_engine("data/raw_videos/my_shot.mp4")
+def test_mock_frame_processing():
+    engine = PoseEngine()
+    # Create a blank black image to simulate a video frame
+    fake_frame = np.zeros((480, 640, 3), dtype=np.uint8)
+    results = engine.get_landmarks(fake_frame)
+    
+    # The test passes if the function executes, even if no landmarks are found in a black image
+    assert hasattr(results, 'pose_landmarks')
