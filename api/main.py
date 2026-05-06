@@ -17,3 +17,15 @@ if __name__ == "__main__":
             print(f"System Crash: {e}. Rebooting in 5 seconds...")
             time.sleep(5)
             continue # Restarts the loop automatically
+import os
+import signal
+
+def emergency_save(signum, frame):
+    """Triggered if the system is shutting down or crashing."""
+    print("CRITICAL: Saving session data before reboot...")
+    # Call your session_manager.checkpoint_state() here
+    exit(1)
+
+# Register the reboot/interrupt signals
+signal.signal(signal.SIGINT, emergency_save)
+signal.signal(signal.SIGTERM, emergency_save)
