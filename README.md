@@ -29,12 +29,6 @@ The system uses a dynamic `SportKernel` to swap physics constants and rule-based
 * **Cloud Sync:** Automated AWS S3 syncing for scouting reports and highlight reels.
 * **Auto-Heartbeat:** Resilient session management that survives crashes via local SQLite logging.
 
-├── api/             # FastAPI backend for remote logging/data storage
-├── core/            # The Brain: physics, kinematics, and AI logic
-├── github/          # CI/CD workflows for automated testing
-├── models/          # Configuration files (YAML) for sport thresholds
-└── Dockerfile       # Production-ready containerization
-
 ---
 
 ### 🛠 Installation
