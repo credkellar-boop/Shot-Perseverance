@@ -119,3 +119,16 @@ if current_sport == "NFL":
     if play_status == "SPECTACULAR":
         renderer.apply_slow_mo(0.15) # Dramatic effect for the score
         renderer.render_fire_trails() # Visual flair for the TD
+# main.py logic update
+def process_frame(frame, audio_chunk):
+    # 1. Physics Engine Check
+    state = classifier.detect_state(landmarks)
+    
+    # 2. Audio 'Wow' Check
+    is_crowd_hyped = audio_monitor.is_spectacular_audio(audio_chunk)
+    
+    # 3. Decision Logic
+    if is_defense(state) or is_spectacular(state) or is_crowd_hyped:
+        save_manager.flag_for_highlights(frame)
+        if is_crowd_hyped:
+            logger.log_event("CROWD_TRIGGERED_HIGHLIGHT", score=100)
