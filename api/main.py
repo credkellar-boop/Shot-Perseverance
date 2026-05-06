@@ -72,3 +72,28 @@ if __name__ == "__main__":
         # Process frames, apply 'Sync-Link' for Alley-oops, 
         # and project Heat Maps to the floor...
         pass
+from core.audio_feedback import SoundEngine
+
+class ShotPerseveranceOS:
+    def __init__(self, video_source, calibration_points):
+        # ... previous initializations ...
+        self.audio = SoundEngine()
+        self.last_state = "IDLE"
+
+    def run(self):
+        while self.cap.isOpened():
+            # ... capture frame and landmarks ...
+            state = self.classifier.detect_state(landmarks)
+
+            # AUDIO TRIGGER LOGIC
+            if state != self.last_state:
+                if state == "GATHER_PHASE":
+                    self.audio.play("setup")
+                elif state == "SHOT_EXECUTION":
+                    # Check 'Perfection' math from kinematics.py
+                    if self.kinematics.get_score() > 90:
+                        self.audio.play("perfect_release")
+                
+                self.last_state = state
+
+            # ... render and log ...
