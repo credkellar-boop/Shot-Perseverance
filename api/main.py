@@ -97,3 +97,18 @@ class ShotPerseveranceOS:
                 self.last_state = state
 
             # ... render and log ...
+def apply_focus_zoom(frame, landmarks, zoom_factor=1.2):
+    """
+    Digitally zooms into the player's 'Shooting Pocket' during Focus.
+    """
+    h, w = frame.shape[:2]
+    # Center the crop on the Mid-Hip landmark
+    center_x, center_y = landmarks[24].x * w, landmarks[24].y * h
+    
+    # Calculate crop boundaries
+    new_w, new_h = w / zoom_factor, h / zoom_factor
+    x1, y1 = int(center_x - new_w/2), int(center_y - new_h/2)
+    
+    # Crop and resize back to 4K
+    cropped = frame[max(0,y1):int(y1+new_h), max(0,x1):int(x1+new_w)]
+    return cv2.resize(cropped, (w, h))
