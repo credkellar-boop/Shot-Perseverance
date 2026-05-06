@@ -112,3 +112,10 @@ def apply_focus_zoom(frame, landmarks, zoom_factor=1.2):
     # Crop and resize back to 4K
     cropped = frame[max(0,y1):int(y1+new_h), max(0,x1):int(x1+new_w)]
     return cv2.resize(cropped, (w, h))
+# main.py logic
+if current_sport == "NFL":
+    renderer.set_priority("DEFENSE") 
+    # Draws 'Sack Clock' on QB and 'Coverage Bubbles' on DBs
+    if play_status == "SPECTACULAR":
+        renderer.apply_slow_mo(0.15) # Dramatic effect for the score
+        renderer.render_fire_trails() # Visual flair for the TD
