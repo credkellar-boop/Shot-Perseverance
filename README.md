@@ -26,4 +26,4 @@ The engine dynamically adjusts physics constants based on the active sport:
 ---
 
 ### 📄 License
-Copyright © 2026 **Darion Kellar**. Distributed under the MIT License.
+Copyright © 2026 **Darion Kellar**. Distributed under the COMMERCIAL LICENSE 
