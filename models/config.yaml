@@ -9,6 +9,7 @@ physics:
 thresholds:
   confidence: 0.65
   motion_blur_skip: true
+
 system:
   auto_sport_detection: true
   reboot_recovery: true
@@ -19,5 +20,5 @@ sports:
     fps_target: 60
     physics: "projectile_motion"
   soccer:
-    fps_target: 120 # Higher FPS for ball curve tracking
+    fps_target: 120
     physics: "magnus_effect"
