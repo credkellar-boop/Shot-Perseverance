@@ -1,10 +1,8 @@
-# ⚾ Shot-Perseverance OS
+# 🏀 Shot-Perseverance OS
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/darionkellar/shot-perseverance/python-app.yml?branch=main&style=for-the-badge&logo=github)
-![Python Version](https://img.shields.io/badge/python-3.11+-blue?style=for-the-badge&logo=python)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
-
-**Shot-Perseverance OS** is a high-performance computer vision engine for real-time multi-sport analytics. It tracks biomechanics, predicts trajectories ($Magnus Effect$), and generates automated 4K highlight reels.
+[![Build Status](https://github.com/credkellar-boop/Shot-Perseverance-OS/actions/workflows/python-app.yml/badge.svg)](https://github.com/credkellar-boop/Shot-Perseverance-OS/actions)
+[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/credkellar-boop/Shot-Perseverance-OS/blob/main/LICENSE)
 
 ---
 
