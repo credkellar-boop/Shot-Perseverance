@@ -18,37 +18,57 @@ Shot-Perseverance is an advanced, multi-sport computer vision and analytics OS e
 * **Biomechanical Kinematics:** Computes precise release heights, velocities, trajectory vectors using the Magnus effect, and joint angles directly from tracking arrays.
 * **Spatial Projection & Calibration:** Uses perspective transformations and interactive camera hom
 
+
+---
+
+
+
+## Shot-Perseverance/
+│
 ├── .github/
 │   └── workflows/
-│       └── python-app.yml       # CI/CD automated pipeline running pytest tests
-├── api/
-│   ├── logger.py               # SQLite asynchronous session and tracking logger
-│   ├── main.py                 # FastAPI operational app framework & endpoints
-│   └── schemas.py              # Pydantic data schemas for analytical validation
-├── core/
-│   ├── audio_feedback.py       # Pygame-based sound effect engine 
-│   ├── audio_spectator.py      # Crowd noise volume threshold and anomaly calculator
-│   ├── ball_physics.py         # Physics mapping incorporating spin and Magnus displacements
-│   ├── calibration.py          # Interactive point-to-world mapping utility
-│   ├── classifier.py           # AI motion state machine (Jump-shots, fast breaks, etc.)
-│   ├── defense_ai.py           # Automated rules-engine scoring for complex defensive shifts
-│   ├── goal_detector.py        # Vertical plane boundaries validation for targets
-│   ├── kernel.py               # Sport-specific property dispatcher and manager
-│   ├── kinematics.py           # Multi-joint trigonometric calculation matrix
-│   ├── offside_ai.py           # Soccer 3D pitch coordinate offside calculation rule
-│   ├── pitch_calibration.py    # FIFA Standard Pitch homography projection matrix
-│   ├── playmaking.py           # Dynamic spatial logic tracking for contextual actions (e.g. Alley-oops)
-│   ├── pose_estimator.py       # MediaPipe native model abstraction framework 
-│   ├── projection.py           # Top-down planar perspective warp matrix mapper
-│   ├── report_gen.py           # FPDF2 automated report generator layout engine
-│   ├── session_manager.py      # Highlight filtering architecture & AWS S3 cloud synchronization
-│   ├── spectacular_logic.py    # Football/Basketball explicit explosive-movement thresholding
-│   ├── transition.py           # Dynamic lane tracking and operational efficiency timers
-│   └── video_processor.py      # Interpolation engine handling slow-motion cinematic processing
+│       └── python-app.yml          # Automated CI/CD Testing Pipeline
+│
+├── api/                            # HTTP Routing & Data Logging Layer
+│   ├── logger.py                   # Async SQLite Database Interaction
+│   ├── main.py                     # FastAPI Core App & Endpoint Routing
+│   └── schemas.py                  # Pydantic Structural Validation Schemas
+│
+├── core/                           # Modular OS Analytics Engine
+│   │
+│   ├── 👁️ CV & Spatial Analytics
+│   │   ├── pose_estimator.py       # MediaPipe Tracking Extraction Engine
+│   │   ├── calibration.py          # Interactive Pixel-to-World Workspace
+│   │   ├── pitch_calibration.py    # Field Homography Mapping Models
+│   │   └── projection.py           # Top-Down Perspective Transformation Matrix
+│   │
+│   ├── 📐 Physics & Kinematics
+│   │   ├── ball_physics.py         # Spin, Arc, & Magnus Effect Tracking
+│   │   └── kinematics.py           # Angular & Velocity Biomechanical Calculations
+│   │
+│   ├── 🧠 Game State & Sport AI
+│   │   ├── kernel.py               # Dynamic Multi-Sport Property Dispatcher
+│   │   ├── classifier.py           # Real-Time Event State Machine
+│   │   ├── defense_ai.py           # Defensive Shift & Pressure Evaluation
+│   │   ├── goal_detector.py        # Plane/Boundary Intersection Validator
+│   │   ├── offside_ai.py           # Positional Offside Evaluation Matrix
+│   │   ├── playmaking.py           # Assist & Spatial Chemistry Tracking
+│   │   ├── spectacular_logic.py    # Highlight Threshold Rule Logic
+│   │   └── transition.py           # Breakaways & Counter-Attack Metrics
+│   │
+│   └── 🎬 Media, Audio & Reporting
+│       ├── audio_feedback.py       # Pygame Low-Latency Audio Event Engine
+│       ├── audio_spectator.py      # Spectator Ambient Decibel Thresholding
+│       ├── video_processor.py      # Cinematic Framing & Interpolation Engine
+│       ├── report_gen.py           # PDF Export Layout & Performance Charts
+│       └── session_manager.py      # AWS Cloud Sync & Highlight Filtering
+│
 ├── models/
-│   └── config.yaml             # Global system configurations, FPS constraints, and sport properties
-├── .gitignore                  # Optimized Python environment configuration rule-set
-├── Dockerfile                  # Multi-stage container file optimized with headless libraries
-├── LICENSE                     # Standard repository distribution governance
-├── requirements.txt            # System dependency manifest
-└── run_test.py                 # Core pytest framework test suite entrypoint
+│   └── config.yaml                 # Global System Thresholds & Constant Rules
+│
+├── .gitignore                      # Python/VSCode Environment Exclusions
+├── Dockerfile                      # Multistage Headless Production Environment
+├── LICENSE                         # Repository Legal/Distribution Framework
+├── README.md                       # Comprehensive Project Documentation
+├── requirements.txt                # Fixed Version Dependency Manifest
+└── run_test.py                     # Core Integration & Framework Test Suite
